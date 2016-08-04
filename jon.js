@@ -67,7 +67,7 @@ window.onresize = function(e) {
     jonJonJon();
 }
 
-// setInterval(changeJon, jonsToChangeInterval);
+setInterval(changeJon, jonsToChangeInterval);
 
 jonEl.addEventListener('click', function(e) {
     changeJon(e.target.dataset.jonNumber);
