@@ -67,7 +67,7 @@ window.onresize = function(e) {
     jonJonJon();
 }
 
-setInterval(changeJon, jonsToChangeInterval);
+// setInterval(changeJon, jonsToChangeInterval);
 
 jonEl.addEventListener('click', function(e) {
     changeJon(e.target.dataset.jonNumber);
@@ -86,32 +86,22 @@ function isJonSurroundedBySame(newPic, jonIndex) {
 
     var numJons = jonPics.length;
     if (numJons > 0) {
-        let foundPic = jonPics[jonIndex - 1];
-        if (foundPic === newPic) {
-            return true;
-        }
+        var foundJons = [
+            jonPics[jonIndex - 1], // left
+            jonPics[jonIndex + 1], // right
+            jonPics[(jonIndex - numberPerRow)], // above
+            jonPics[(jonIndex + numberPerRow)] // below
+        ];
 
-        foundPic = jonPics[jonIndex + 1]
-        if (foundPic !== undefined && foundPic === newPic) {
-            return true;
-        }
-
-        foundPic = jonPics[(jonIndex - numberPerRow) + 1];
-        if (foundPic !== undefined && foundPic === newPic) {
-            return true;
-        }
-
-        foundPic = jonPics[(jonIndex + numberPerRow) - 1];
-        if (foundPic !== undefined + numberPerRow && foundPic === newPic) {
-            return true;
+        for (var j = 0; j < foundJons.length; j++) {
+            if (newPic === foundJons[j]) return true;
         }
     }
-
     return false;
 }
 
-function changeJon(changeMe = null) {
-    let changeNo = changeMe ? 1 : jonsToChange;
+function changeJon(changeMe) {
+    var changeNo = changeMe ? 1 : jonsToChange;
     for (var i = 0; i < changeNo; i++) {
         var jonPic = null;
         var jonToChangeIndex = changeMe ? changeMe : Math.floor(Math.random() * numberOfSquares);
